@@ -1,0 +1,34 @@
+<div class="container">
+  <h3>Alta de cliente</h3>
+
+  <div class="form-group row">
+    <label for="Nombre" class="col-sm-2 col-form-label">
+      Nombre:
+    </label>
+    <div class="col-sm-10">
+      <Input id="Nombre" class="form-control" placeholder="Nombre" />
+    </div>
+  </div>
+  <br />
+  <div class="form-group row">
+    <label for="Email" class="col-sm-2 col-form-label">
+      Email:
+    </label>
+    <div class="col-sm-10">
+      <Input id="Email" class="form-control" type="email" placeholder="Email" />
+    </div>
+  </div>
+  <br />
+  <div class="form-group row">
+    <label for="Password" class="col-sm-2 col-form-label">
+      Password:
+    </label>
+    <div class="col-sm-10">
+      <Input id="Password" class="form-control" type="password" placeholder="Password" />
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <button class="btn btn-primary" (click)="AgregarCliente()">Agregar nuevo cliente</button>
+  </div>
+</div>

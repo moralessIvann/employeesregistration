@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class IncioComponent {
   public Libreria = "Lib pepito"
 
-  public CambiarNombre() {
-    this.Libreria = "Lib Manolito"
-  }
+  //public CambiarNombre() {
+  //  this.Libreria = "Lib Manolito"
+  //}
 }

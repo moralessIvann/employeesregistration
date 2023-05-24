@@ -1,8 +1,17 @@
 var builder = WebApplication.CreateBuilder(args);
+string cors = "ConfigurarCORS";
 
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: cors, builder =>
+    {
+        builder.WithOrigins("*");
+    });
+
+});
 
 var app = builder.Build();
 
@@ -16,6 +25,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+app.UseCors(cors);
 
 
 app.MapControllerRoute(

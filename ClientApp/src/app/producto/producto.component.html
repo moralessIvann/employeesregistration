@@ -1,0 +1,29 @@
+<table>
+  <thead>
+    <tr>
+      <th><strong>#</strong></th>
+      <th><strong>Nombre Libro</strong></th>
+      <th><strong>Descripcion</strong></th>
+      <th><strong>Precio</strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pro of listaProductos">
+      <td>
+        {{pro.id}}
+      </td>
+      <td class="text/primary">
+        <strong>{{pro.nombre}}</strong>
+      </td>
+      <td>
+        {{pro.descripcion}}
+      </td>
+      <td>
+        {{pro.precio}}
+      </td>
+      <td>
+        {{pro.autor}}
+      </td>
+    </tr>
+  </tbody>
+</table>

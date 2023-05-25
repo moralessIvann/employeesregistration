@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { IncioComponent } from './inicio/inicio.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { LoginComponent } from './login/login.component';
+import { ProductoComponent } from './producto/producto.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoginComponent } from './login/login.component';
     IncioComponent,
     ClienteComponent,
     LoginComponent,
+    ProductoComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -27,6 +29,7 @@ import { LoginComponent } from './login/login.component';
       { path: 'inicio', component: IncioComponent },
       { path: 'cliente', component: ClienteComponent },
       { path: 'login', component: LoginComponent },
+      { path: 'producto', component: ProductoComponent },
     ])
   ],
   providers: [],

@@ -19,7 +19,7 @@ namespace net_angular.Controllers
         [HttpGet]
         public IActionResult ConsultarCliente()
         {
-            Resultado res = new Resultado();
+            ResultadoJson res = new ResultadoJson();
 
             try
             {
@@ -43,7 +43,7 @@ namespace net_angular.Controllers
         [HttpPost]
         public IActionResult AgregarCliente(ClienteViewModel c)
         {
-            Resultado res = new Resultado();
+            ResultadoJson res = new ResultadoJson();
 
             try
             {
@@ -73,7 +73,7 @@ namespace net_angular.Controllers
         [HttpPut]
         public IActionResult EditarCliente(ClienteViewModel c)
         {
-            Resultado res = new Resultado();
+            ResultadoJson res = new ResultadoJson();
 
             try
             {
@@ -104,7 +104,7 @@ namespace net_angular.Controllers
         [HttpDelete("{Email}")]
         public IActionResult BorrarCliente(string email)
         {
-            Resultado res = new Resultado();
+            ResultadoJson res = new ResultadoJson();
 
             try
             {

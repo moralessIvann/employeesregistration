@@ -5,6 +5,11 @@ namespace net_angular.Models;
 
 public partial class Producto
 {
+    public Producto()
+    {
+        LineasPedidos = new HashSet<LineasPedido>();
+    }
+
     public int Id { get; set; }
 
     public string Nombre { get; set; } = null!;

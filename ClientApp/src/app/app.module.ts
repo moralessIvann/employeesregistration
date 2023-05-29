@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { IncioComponent } from './inicio/inicio.component';
+import { InicioComponent } from './inicio/inicio.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { LoginComponent } from './login/login.component';
 import { ProductoComponent } from './producto/producto.component';
@@ -15,7 +15,7 @@ import { ProductoComponent } from './producto/producto.component';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    IncioComponent,
+    InicioComponent,
     ClienteComponent,
     LoginComponent,
     ProductoComponent,
@@ -25,8 +25,8 @@ import { ProductoComponent } from './producto/producto.component';
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: IncioComponent, pathMatch: 'full' },
-      { path: 'inicio', component: IncioComponent },
+      { path: '', component: InicioComponent, pathMatch: 'full' },
+      { path: 'inicio', component: InicioComponent },
       { path: 'cliente', component: ClienteComponent },
       { path: 'login', component: LoginComponent },
       { path: 'producto', component: ProductoComponent },

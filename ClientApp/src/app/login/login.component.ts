@@ -8,8 +8,8 @@ import { ClienteService } from '../services/cliente.service';
 
 export class LoginComponent
 {
-  constructor(private api: ClienteService)
+  constructor(private ServicioProducto: ClienteService)
   {
-    api.obtenerClientes().subscribe(res => { console.log(res)});
+    ServicioProducto.obtenerClientes().subscribe(res => { console.log(res)});
   }
 }

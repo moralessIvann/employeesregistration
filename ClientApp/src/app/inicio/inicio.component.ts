@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-inicio-component',
   templateUrl: './inicio.component.html'
 })
 
-export class IncioComponent {
-  public Libreria = "Lib pepito"
+export class InicioComponent {
 
-  //public CambiarNombre() {
-  //  this.Libreria = "Lib Manolito"
-  //}
+  constructor(private router: Router) { }
+
+  public Libreria = "Lib pepito";
+
+  public Navegar() {
+    this.router.navigate(['/productos']);
+  }
 }

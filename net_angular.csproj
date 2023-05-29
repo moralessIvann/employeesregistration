@@ -30,6 +30,7 @@
     <None Remove="ClientApp\src\app\cliente\cliente.component.ts" />
     <None Remove="ClientApp\src\app\inicio\inicio.component.ts" />
     <None Remove="ClientApp\src\app\login\login.component.ts" />
+    <None Remove="ClientApp\src\app\modelos\cliente.ts" />
     <None Remove="ClientApp\src\app\modelos\resultadoJson.ts" />
     <None Remove="ClientApp\src\app\producto\producto.component.ts" />
     <None Remove="ClientApp\src\app\services\cliente.service.ts" />
@@ -40,6 +41,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\cliente\cliente.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\inicio\inicio.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\login\login.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelos\cliente.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\resultadoJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\producto\producto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\cliente.service.ts" />

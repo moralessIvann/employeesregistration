@@ -19,6 +19,6 @@ export class ProductoService
 
   consultarProductos(): Observable<Resultado>
   {
-    return this.peticion.get<Resultado>(this.url)
+    return this.peticion.get<Resultado>(this.url);
   }
 }

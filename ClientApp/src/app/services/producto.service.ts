@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Resultado } from '../modelos/resultadoJson';
+import { ResultadoJson } from '../modelos/resultadoJson';
 
 @Injectable
   ({
@@ -17,8 +17,8 @@ export class ProductoService
 
   }
 
-  consultarProductos(): Observable<Resultado>
+  consultarProductos(): Observable<ResultadoJson>
   {
-    return this.peticion.get<Resultado>(this.url);
+    return this.peticion.get<ResultadoJson>(this.url);
   }
 }

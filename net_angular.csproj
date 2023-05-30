@@ -17,6 +17,10 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.TypeScript.Compiler" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -30,7 +34,7 @@
     <None Remove="ClientApp\src\app\cliente\cliente.component.ts" />
     <None Remove="ClientApp\src\app\inicio\inicio.component.ts" />
     <None Remove="ClientApp\src\app\login\login.component.ts" />
-    <None Remove="ClientApp\src\app\modelos\cliente.ts" />
+    <None Remove="ClientApp\src\app\modelos\ClienteJson.ts" />
     <None Remove="ClientApp\src\app\modelos\resultadoJson.ts" />
     <None Remove="ClientApp\src\app\producto\producto.component.ts" />
     <None Remove="ClientApp\src\app\services\cliente.service.ts" />
@@ -41,7 +45,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\cliente\cliente.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\inicio\inicio.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\login\login.component.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\modelos\cliente.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelos\clienteJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\resultadoJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\producto\producto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\cliente.service.ts" />

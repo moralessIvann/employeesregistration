@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute} from '@angular/router';
 import { ClienteService } from '../services/cliente.service';
-import { Cliente } from '../modelos/cliente';
+import { ClienteJson } from '../modelos/clienteJson';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 @Component({
   selector: 'app-cliente-component',
@@ -10,25 +11,47 @@ import { Cliente } from '../modelos/cliente';
 
 export class ClienteComponent{
 
-  @Input() nombre: string | undefined;
-  @Input() email: string | undefined;
+  altaForm: FormGroup;
+  enviado: boolean = false;
 
-  nombreQueryString: string | undefined;
-  emailQueryString: string | undefined;
-
-
-  constructor(private route: ActivatedRoute, private servicioCliente: ClienteService)
+  constructor(private servicioCliente: ClienteService, private formBuilder: FormBuilder)
   {
-    this.route.queryParams.subscribe(params => {
-      this.nombreQueryString = params['nombre'];
-      this.emailQueryString = params['email'];
-    });
   }
+
+  ngOnInit(): void /*pass value to form controls */ 
+  {
+    this.altaForm = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
+    })
+  }
+
+  get formulario(): { [key: string]: AbstractControl }
+  {
+    return this.altaForm.controls;
+  }
+
 
   public AgregarCliente()
   {
-    const cliente: Cliente = { nombre: 'Pepito', email: 'pepito@gmail.com', password: '21345' };
-    this.servicioCliente.agregarClientes(cliente).subscribe;
+    console.log("cliente component ts : AgregarCliente Pepito al presionar boton");
+    this.enviado = true;
+    if (this.altaForm.invalid) {
+      console.log("invalido");
+      return;
+    }
+    console.log("valido");
+    //const cliente: Cliente = { nombre: 'Pepito', email: 'pepito@gmail.com', password: '21345' };
+    //this.servicioCliente.agregarClientes(cliente).subscribe;
+
+    let cliente: ClienteJson =
+    {
+      nombre: this.altaForm.controls['nombre'].value,
+      email: this.altaForm.controls['email'].value,
+      password: this.altaForm.controls['password'].value
+    };
+    this.servicioCliente.agregarClientes(cliente).subscribe();
   }
 
 }

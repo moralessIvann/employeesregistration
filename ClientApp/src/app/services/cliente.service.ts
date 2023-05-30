@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Resultado } from '../modelos/resultadoJson';
-import { Cliente } from '../modelos/cliente';
+import { ResultadoJson } from '../modelos/resultadoJson';
+import { ClienteJson } from '../modelos/clienteJson';
 
 @Injectable
   ({
@@ -18,14 +18,16 @@ export class ClienteService
 
   }
 
-  obtenerClientes(): Observable<Resultado>
+  obtenerClientes(): Observable<ResultadoJson>
   {
-    return this.peticion.get<Resultado>(this.url)
+    console.log("obtenerClientes");
+    return this.peticion.get<ResultadoJson>(this.url)
   }
 
-  agregarClientes(cliente: Cliente): Observable<Resultado>
+  agregarClientes(cliente: ClienteJson): Observable<ResultadoJson>
   {
-    return this.peticion.post<Resultado>(this.url, cliente);
+    console.log("cliente service: agregarClientes");
+    return this.peticion.post<ResultadoJson>(this.url, cliente);
 
   }
 }

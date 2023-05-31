@@ -129,5 +129,7 @@
       }
     }
   },
-  "defaultProject": "net_angular"
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute} from '@angular/router';
+import { Component, Input, OnInit, ViewChild, TemplateRef } from '@angular/core';
+// import { ActivatedRoute} from '@angular/router';
 import { ClienteService } from '../services/cliente.service';
 import { ClienteJson } from '../modelos/clienteJson';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormBuilder, Validators, AbstractControl, FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-cliente-component',
@@ -13,8 +14,10 @@ export class ClienteComponent{
 
   altaForm: FormGroup;
   enviado: boolean = false;
+  resultadoPeticion: string;
+  @ViewChild("myModalInfo", { static: false }) myModalInfo: TemplateRef<any>;
 
-  constructor(private servicioCliente: ClienteService, private formBuilder: FormBuilder)
+  constructor(private servicioCliente: ClienteService, private formBuilder: FormBuilder, private modalService: NgbModal)
   {
   }
 
@@ -26,7 +29,7 @@ export class ClienteComponent{
       password: ['', Validators.required]
     })
   }
-
+   
   get formulario(): { [key: string]: AbstractControl }
   {
     return this.altaForm.controls;
@@ -51,7 +54,15 @@ export class ClienteComponent{
       email: this.altaForm.controls['email'].value,
       password: this.altaForm.controls['password'].value
     };
-    this.servicioCliente.agregarClientes(cliente).subscribe();
+
+    this.servicioCliente.agregarClientes(cliente).subscribe(res => {
+      if (res.error != null && res.error != '')
+        this.resultadoPeticion = res.texto;
+      else
+        this.resultadoPeticion = "Cliente dado de alta correctamente. Inicie sesion";
+
+      this.modalService.open(this.myModalInfo);
+    });
   }
 
 }

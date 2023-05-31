@@ -10,6 +10,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { ClienteComponent } from './cliente/cliente.component';
 import { LoginComponent } from './login/login.component';
 import { ProductoComponent } from './producto/producto.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { ProductoComponent } from './producto/producto.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    NgbModule,
     RouterModule.forRoot([
       { path: '', component: InicioComponent, pathMatch: 'full' },
       { path: 'inicio', component: InicioComponent },

@@ -66,6 +66,7 @@ namespace net_angular.Controllers
             {
 
                 res.Error = "Se produjo un error al agregar los clientes" + ex.Message;
+                res.Texto = "Se produjo un error al agregar los clientes" + ex.Message;
             }
             return Ok(res);
         }

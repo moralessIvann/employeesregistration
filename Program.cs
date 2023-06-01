@@ -8,6 +8,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy(name: cors, builder =>
     {
+        builder.WithMethods("*"); //usar metodos de peticiones 
         builder.WithHeaders("*"); // permitir peticiones post, put , etc
         builder.WithOrigins("*"); // permitir peticiones de todos los orignes
     });

@@ -15,13 +15,15 @@ public partial class CursoAngularNetCoreContext : DbContext
     {
     }
 
-    public virtual DbSet<ClienteModel> Clientes { get; set; }
+    public virtual DbSet<Cliente> Clientes { get; set; }
 
     public virtual DbSet<LineasPedido> LineasPedidos { get; set; }
 
     public virtual DbSet<Pedido> Pedidos { get; set; }
 
     public virtual DbSet<Producto> Productos { get; set; }
+
+    public virtual DbSet<UsuariosApi> UsuariosApis { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -31,18 +33,21 @@ public partial class CursoAngularNetCoreContext : DbContext
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("SQL"));
         }
     }
+        
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<ClienteModel>(entity =>
+        modelBuilder.Entity<Cliente>(entity =>
         {
             entity.ToTable("CLIENTES");
 
-            entity.Property(e => e.Email).HasMaxLength(500);
+            entity.HasIndex(e => e.Email, "IX_CLIENTES").IsUnique();
+
+            entity.Property(e => e.Email).HasMaxLength(300);
             entity.Property(e => e.FechaAlta).HasColumnType("datetime");
             entity.Property(e => e.FechaBaja).HasColumnType("datetime");
             entity.Property(e => e.Nombre).HasMaxLength(500);
-            entity.Property(e => e.Password).HasMaxLength(500);
+            entity.Property(e => e.Password).HasMaxLength(300);
         });
 
         modelBuilder.Entity<LineasPedido>(entity =>
@@ -80,13 +85,28 @@ public partial class CursoAngularNetCoreContext : DbContext
         {
             entity.ToTable("PRODUCTOS");
 
+            entity.Property(e => e.Autor).HasMaxLength(100);
             entity.Property(e => e.Descripcion)
                 .HasMaxLength(1000)
                 .IsUnicode(false);
             entity.Property(e => e.Nombre)
                 .HasMaxLength(500)
                 .IsUnicode(false);
-            entity.Property(e => e.Precio).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.Precio).HasColumnType("decimal(18, 2)");
+        });
+
+        modelBuilder.Entity<UsuariosApi>(entity =>
+        {
+            entity.ToTable("USUARIOS_API");
+
+            entity.HasIndex(e => e.Email, "IX_USUARIOS_API").IsUnique();
+
+            entity.Property(e => e.Email)
+                .HasMaxLength(500)
+                .IsUnicode(false);
+            entity.Property(e => e.FechaAlta).HasColumnType("datetime");
+            entity.Property(e => e.FechaBaja).HasColumnType("datetime");
+            entity.Property(e => e.Password).HasMaxLength(500);
         });
 
         OnModelCreatingPartial(modelBuilder);

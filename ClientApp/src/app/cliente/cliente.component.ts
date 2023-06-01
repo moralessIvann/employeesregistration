@@ -63,6 +63,29 @@ export class ClienteComponent{
 
       this.modalService.open(this.myModalInfo);
     });
-  }
 
+
+    /*
+
+    
+     this.servicioCliente.borrarClientes(this.altaForm.controls['email'].value).subscribe(res => {
+      if (res.error != null && res.error != '')
+        this.resultadoPeticion = res.texto;
+      else
+        this.resultadoPeticion = "Cliente eliminado";
+
+      this.modalService.open(this.myModalInfo);
+    })
+
+    this.servicioCliente.editarClientes(cliente).subscribe(res => {
+      if (res.error != null && res.error != '')
+        this.resultadoPeticion = res.texto;
+      else
+        this.resultadoPeticion = "Cliente editado correctamente.";
+
+      this.modalService.open(this.myModalInfo);
+    });
+
+    */
+  }
 }

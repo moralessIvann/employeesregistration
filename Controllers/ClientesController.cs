@@ -52,7 +52,7 @@ namespace net_angular.Controllers
 
                 using (CursoAngularNetCoreContext basedatos = new CursoAngularNetCoreContext())
                 {
-                    ClienteModel cliente = new ClienteModel();
+                    Cliente cliente = new Cliente();
                     cliente.Nombre = c.nombre;
                     cliente.Email = c.email;
                     // convertir password a array de bytes
@@ -85,7 +85,7 @@ namespace net_angular.Controllers
                 {
                     // devuelve single cliente cuyo email corresponda al que se le pase con el objeto viewModel es decir el que venga
                     //en la peticion PUT
-                    ClienteModel cliente = basedatos.Clientes.Single(client => client.Id == c.id);
+                    Cliente cliente = basedatos.Clientes.Single(client => client.Email == c.email);
                     cliente.Nombre = c.nombre;
                     // convertir password a array de bytes
                     cliente.Password = Encoding.ASCII.GetBytes(util.EncryptText(c.password, configuration["ClaveSecreta"]));
@@ -103,7 +103,7 @@ namespace net_angular.Controllers
         }
 
         [HttpDelete("{Email}")]
-        public IActionResult BorrarCliente(string email)
+        public IActionResult BorrarCliente(String email)
         {
             ResultadoJson res = new ResultadoJson();
 
@@ -113,7 +113,7 @@ namespace net_angular.Controllers
                 {
                     // devuelve single cliente cuyo email corresponda al que se le pase con el objeto viewModel es decir el que venga
                     //en la peticion PUT
-                    ClienteModel cliente = basedatos.Clientes.Single(client => client.Email == email);
+                    Cliente cliente = basedatos.Clientes.Single(client => client.Email == email);
                     basedatos.Remove(cliente);
                     basedatos.SaveChanges();
                 }

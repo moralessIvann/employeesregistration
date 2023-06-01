@@ -20,14 +20,21 @@ export class ClienteService
 
   obtenerClientes(): Observable<ResultadoJson>
   {
-    console.log("obtenerClientes");
     return this.peticion.get<ResultadoJson>(this.url)
   }
 
   agregarClientes(cliente: ClienteJson): Observable<ResultadoJson>
   {
-    console.log("cliente service: agregarClientes");
     return this.peticion.post<ResultadoJson>(this.url, cliente);
-
   }
+
+  editarClientes(cliente: ClienteJson): Observable<ResultadoJson>
+  {
+    return this.peticion.put<ResultadoJson>(this.url, cliente);
+  }
+
+  borrarClientes(email: string): Observable<ResultadoJson> {
+    return this.peticion.delete<ResultadoJson>(this.url + email);
+  }
+
 }

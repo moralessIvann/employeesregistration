@@ -13,7 +13,7 @@ public partial class Pedido
 
     public DateTime FechaPedido { get; set; }
 
-    public virtual ClienteModel IdClienteNavigation { get; set; } = null!;
+    public virtual Cliente IdClienteNavigation { get; set; } = null!;
 
     public virtual ICollection<LineasPedido> LineasPedidos { get; set; } = new List<LineasPedido>();
 }

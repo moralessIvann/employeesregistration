@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using net_angular.Models;
 using net_angular.Models.ViewModels;
+using net_angular.Servicios;
 using System.Text;
 
 namespace net_angular.Controllers
@@ -11,12 +12,15 @@ namespace net_angular.Controllers
     public class UsuarioAPIController : ControllerBase
     {
         private readonly IConfiguration configuration;
+        private IUsuarioAPI usuarioAPIServicio;
 
-        public UsuarioAPIController(IConfiguration configuration)
+        public UsuarioAPIController(IConfiguration configuration, IUsuarioAPI usuarioAPIServicio)
         {
             this.configuration = configuration;
+            this.usuarioAPIServicio = usuarioAPIServicio;
         }
-
+        // Se utilizo de forma temporal para hacer alta de clientes
+        /*
         [HttpPost("Alta")]
         public IActionResult AltaUsuario(AuthenticationAPI usuarioAPI)
         {
@@ -44,30 +48,18 @@ namespace net_angular.Controllers
             }
 
             return Ok(resultadoJson);
-        }
+        }*/
 
-        [HttpGet("{Email}/{Pass}")]
-
-        public IActionResult DameUsuarioAPI(string Email, string Password)
+        // [HttpGet("{Email}/{Pass}")]
+        [HttpPost]
+        public IActionResult DameUsuarioAPI(AuthenticationAPI auth)
         {
-            AuthenticationAPI authentication = new AuthenticationAPI();
+            // AuthenticationAPI authentication = new AuthenticationAPI();
             ResultadoJson resultadoJson = new ResultadoJson();
 
             try
             {
-                byte[] keyBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
-                Util util = new Util(keyBytes);
-
-                using (CursoAngularNetCoreContext basedatos = new CursoAngularNetCoreContext())
-                {
-                    UsuariosApi cliente = basedatos.UsuariosApis.Single(usuario => usuario.Email == Email);
-                    authentication.password = util.DecryptText(Encoding.ASCII.GetString(cliente.Password), configuration["ClaveCifrado"]);
-                    authentication.email = cliente.Email;
-                    if (Password == authentication.password)
-                        resultadoJson.ObjetoGenerico = authentication;
-                    else
-                        throw new Exception("Usuario desconocido");
-                }
+                resultadoJson.ObjetoGenerico = usuarioAPIServicio.Autenticacion(auth);
 
             }
             catch (Exception ex)

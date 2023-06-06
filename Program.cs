@@ -1,3 +1,8 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using net_angular.Servicios;
+using System.Text;
+
 var builder = WebApplication.CreateBuilder(args);
 string cors = "ConfigurarCORS";
 
@@ -15,6 +20,24 @@ builder.Services.AddCors(options =>
 
 });
 
+// indicar que se inyectara este servicio a la aplicacion
+builder.Services.AddScoped<IUsuarioAPI, UsuarioAPIServicio>();
+
+//JWT
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+{
+    options.TokenValidationParameters = new TokenValidationParameters()
+    {
+        ValidateIssuer = true,
+        ValidateAudience = true,
+        ValidateLifetime = true,
+        ValidateIssuerSigningKey = true,
+        ValidIssuer = builder.Configuration["JWT:Issuer"],
+        ValidAudience = builder.Configuration["JWT:Audience"],
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:ClaveSecretaJWT"])),
+    };
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -28,6 +51,10 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseCors(cors);
+
+//usar jwt en los servicios
+app.UseAuthentication();
+app.UseAuthorization();
 
 
 app.MapControllerRoute(

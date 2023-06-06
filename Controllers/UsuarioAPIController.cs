@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using net_angular.Models;
 using net_angular.Models.ViewModels;
@@ -48,9 +49,10 @@ namespace net_angular.Controllers
             }
 
             return Ok(resultadoJson);
-        }*/
+        }
+        */
 
-        // [HttpGet("{Email}/{Pass}")]
+        //[HttpGet("{Email}/{Pass}")]
         [HttpPost]
         public IActionResult DameUsuarioAPI(AuthenticationAPI auth)
         {
@@ -64,7 +66,7 @@ namespace net_angular.Controllers
             }
             catch (Exception ex)
             {
-                resultadoJson.Error = "Se produjo un error al obtener cliente de alta en el API" + ex.ToString();
+                resultadoJson.Error = "Se produjo un error al obtener usuario del API" + ex.ToString();
             }
 
             return Ok(resultadoJson);

@@ -16,7 +16,7 @@ namespace net_angular.Servicios
             this.configuration = configuration;
         }
 
-        public UsuarioAPIViewModel Autenticacion(AuthenticationAPI authenticationAPI)
+        public UsuarioAPIViewModel Autenticacion(AuthenticationAPI authenticationAPI) //si llega
         {
             UsuarioAPIViewModel res = new UsuarioAPIViewModel();
             byte[] keyBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -26,7 +26,7 @@ namespace net_angular.Servicios
             {
                 UsuariosApi usuarioAPI = basedatos.UsuariosApis.Single(usuario => usuario.Email == authenticationAPI.email);
                 if (usuarioAPI != null &
-                    authenticationAPI.password == util.DecryptText(Encoding.ASCII.GetString(usuarioAPI.Password), configuration["ClaveCifrado"]))
+                    authenticationAPI.password == util.DecryptText(Encoding.ASCII.GetString(usuarioAPI.Password), configuration["ClaveSecreta"]))
                 { 
                     res.email = usuarioAPI.Email;
                     res.token = GenerarTokenJWT(authenticationAPI);
@@ -44,7 +44,7 @@ namespace net_angular.Servicios
         private string GenerarTokenJWT(AuthenticationAPI usuarioInfo)
         {
             var _symmetricSecurityKey = new SymmetricSecurityKey(
-                Encoding.UTF8.GetBytes(configuration["JWT:ClaveSecreta"]));
+                Encoding.UTF8.GetBytes(configuration["JWT:ClaveSecretaJWT"]));
 
             var _signingCredentials = new SigningCredentials(
                 _symmetricSecurityKey, SecurityAlgorithms.HmacSha256);

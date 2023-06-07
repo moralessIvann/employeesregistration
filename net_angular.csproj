@@ -35,22 +35,28 @@
     <None Remove="ClientApp\src\app\cliente\cliente.component.ts" />
     <None Remove="ClientApp\src\app\inicio\inicio.component.ts" />
     <None Remove="ClientApp\src\app\login\login.component.ts" />
+    <None Remove="ClientApp\src\app\modelos\authenticationAPIJson.ts" />
     <None Remove="ClientApp\src\app\modelos\ClienteJson.ts" />
     <None Remove="ClientApp\src\app\modelos\resultadoJson.ts" />
     <None Remove="ClientApp\src\app\producto\producto.component.ts" />
+    <None Remove="ClientApp\src\app\Seguridad\autenticacion.guard.ts" />
     <None Remove="ClientApp\src\app\services\cliente.service.ts" />
     <None Remove="ClientApp\src\app\services\producto.service.ts" />
+    <None Remove="ClientApp\src\app\services\usuarioApi.service.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\cliente\cliente.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\inicio\inicio.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\login\login.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelos\authenticationAPIJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\clienteJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\resultadoJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\producto\producto.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Seguridad\autenticacion.guard.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\cliente.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\producto.service.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\services\usuarioApi.service.ts" />
   </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

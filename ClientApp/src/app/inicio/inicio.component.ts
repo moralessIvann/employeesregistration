@@ -8,11 +8,12 @@ import { Router } from '@angular/router';
 
 export class InicioComponent {
 
+  // Router para navegar entre pags
   constructor(private router: Router) { }
 
   public Libreria = "Lib pepito";
 
   public Navegar() {
-    this.router.navigate(['/productos']);
+    this.router.navigate(['/login']);
   }
 }

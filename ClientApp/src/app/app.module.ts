@@ -11,6 +11,7 @@ import { ClienteComponent } from './cliente/cliente.component';
 import { LoginComponent } from './login/login.component';
 import { ProductoComponent } from './producto/producto.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AutenticacionGuard } from './Seguridad/autenticacion.guard';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       { path: 'inicio', component: InicioComponent },
       { path: 'cliente', component: ClienteComponent },
       { path: 'login', component: LoginComponent },
-      { path: 'producto', component: ProductoComponent },
+      { path: 'producto', component: ProductoComponent, canActivate: [AutenticacionGuard] },
     ])
   ],
   providers: [],

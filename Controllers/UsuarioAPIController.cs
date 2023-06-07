@@ -10,6 +10,7 @@ namespace net_angular.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize]
     public class UsuarioAPIController : ControllerBase
     {
         private readonly IConfiguration configuration;

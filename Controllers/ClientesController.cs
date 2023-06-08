@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using net_angular.Models;
 using net_angular.Models.ViewModels;
@@ -8,6 +9,7 @@ namespace net_angular.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize] // peticiones no entran hasta incrustar token en cabeceras
     public class ClientesController : ControllerBase
     {
         private readonly IConfiguration configuration;
@@ -125,5 +127,40 @@ namespace net_angular.Controllers
             }
             return Ok(res);
         }
+
+        [HttpPost("Login")]
+        public IActionResult Login(ClienteViewModel c)
+        {
+            ResultadoJson resultado = new ResultadoJson();
+
+            try
+            {
+                byte[] keyBytes = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+                Util util = new Util(keyBytes);
+
+                using (CursoAngularNetCoreContext basedatos = new CursoAngularNetCoreContext())
+                {
+                    Cliente cliente = basedatos.Clientes.Single(cli => cli.Email == c.email);
+                    if (cliente == null || c.password != util.DecryptText(Encoding.ASCII.GetString(cliente.Password), configuration["ClaveSecreta"]))
+                    {
+                        throw new Exception("Error al iniciar sesion");
+                    }
+                    else
+                    {
+                        resultado.ObjetoGenerico = c;
+                    }
+                    
+                }
+            }
+            catch (Exception ex)
+            {
+
+                resultado.Error = "Se produjo un error al iniciar sesion" + ex.ToString();
+                resultado.Texto = "Usuario o password incorrecta";
+            }
+            
+            return Ok(resultado);
+        }
+    
     }
 }

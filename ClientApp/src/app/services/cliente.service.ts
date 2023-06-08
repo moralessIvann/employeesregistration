@@ -37,4 +37,14 @@ export class ClienteService
     return this.peticion.delete<ResultadoJson>(this.url + email);
   }
 
+  loginCliente(cliente: ClienteJson, token: string): Observable<ResultadoJson>
+  {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer' + token
+    });
+
+    return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader });
+  }
+
 }

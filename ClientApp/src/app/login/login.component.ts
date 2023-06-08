@@ -6,6 +6,8 @@ import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/fo
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { UsuarioAPIJson } from '../modelos/usuarioAPIJson';
 import { ClienteJson } from '../modelos/clienteJson';
+import { ClienteService } from '../services/cliente.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-component',
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit {
   token: string;
 
   constructor(private servicioLogin: UsuarioApiService, private formBuilder: FormBuilder,
-    private modalService: NgbModal) {
+    private modalService: NgbModal, private servicioCliente: ClienteService, private router: Router) {
 
     // ServicioProducto.obtenerClientes().subscribe(res => { console.log(res)});
     this.usuarioAPI = {
@@ -68,9 +70,16 @@ export class LoginComponent implements OnInit {
       password: this.loginForm.controls['pass'].value
     };
 
+    this.servicioCliente.loginCliente(cliente, this.token).subscribe((respuesta => {
+      if (respuesta.error != null && respuesta.error != '')
+        this.resultadoPeticion = respuesta.texto;
+      else
+        this.resultadoPeticion = "Login correcto";
 
-    //Llamar método de Login incrustando el token en la cabecerea
-    this.resultadoPeticion = this.token;
+    });
+
+    // Llamar método de Login incrustando el token en la cabecerea
+    // this.resultadoPeticion = this.token;
     this.modalService.open(this.myModalInfo);
   }
 }

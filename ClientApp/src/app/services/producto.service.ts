@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ResultadoJson } from '../modelos/resultadoJson';
 
@@ -17,8 +17,20 @@ export class ProductoService
 
   }
 
+  /*
   consultarProductos(): Observable<ResultadoJson>
   {
     return this.peticion.get<ResultadoJson>(this.url);
+  }
+  */
+
+  dameProductos(token: string): Observable<ResultadoJson>
+  {
+    var reqHeader = new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    });
+    
+    return this.peticion.get<ResultadoJson>(this.url, { headers: reqHeader });
   }
 }

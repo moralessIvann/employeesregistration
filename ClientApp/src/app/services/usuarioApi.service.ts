@@ -14,7 +14,6 @@ import { map } from 'rxjs/operators';
 
 export class UsuarioApiService
 {
-  // url: string = 'https://localhost:7182/api/clientes/';
   url: string = 'https://localhost:7182/api/UsuarioAPI/';
 
   private tokenAPISubject: BehaviorSubject<string>;
@@ -38,10 +37,10 @@ export class UsuarioApiService
           const token: string = (result.objetoGenerico as UsuarioAPIJson).token;
           localStorage.setItem('token', JSON.stringify(token));
           this.tokenAPISubject.next(token);
+          console.log("loginAPI method");
         }
         return result;
       })
-
     );
   }
 

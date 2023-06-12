@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { ResultadoJson } from '../modelos/resultadoJson';
 import { ClienteJson } from '../modelos/clienteJson';
+import { map } from 'rxjs/operators';
 
 @Injectable
   ({
@@ -12,10 +13,15 @@ import { ClienteJson } from '../modelos/clienteJson';
 export class ClienteService
 {
   url: string = 'https://localhost:7182/api/clientes/';
+  private emailLoginSubject: BehaviorSubject<ClienteJson>
+
+  public get usuarioLogin(): ClienteJson {
+    return this.emailLoginSubject.value;
+  }
 
   constructor(private peticion: HttpClient)
   {
-
+    this.emailLoginSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('emailLogin') || '{}'));
   }
 
   obtenerClientes(): Observable<ResultadoJson>
@@ -44,7 +50,16 @@ export class ClienteService
       'Authorization': 'Bearer' + token
     });
 
-    return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader });
+    return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader }).pipe(
+      map(result => {
+        if (result.error == null || result.error == '') {
+          const cliente: ClienteJson = (result.objetoGenerico as ClienteJson);
+          localStorage.setItem('emailLogin', JSON.stringify(cliente));
+          this.emailLoginSubject.next(cliente);
+        }
+        return result;
+      })
+    );
   }
 
 }

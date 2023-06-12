@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
+import { ClienteService } from '../services/cliente.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,15 +9,20 @@ import { Observable } from 'rxjs';
 export class AutenticacionGuard implements CanActivate
 {
 
-  constructor(private rutas: Router) { }
+  constructor(private rutas: Router, private servicioCliente: ClienteService) { }
 
-  public Libreria = "Libreria Pepito";
+  // public Libreria = "Libreria Pepito";
 
   canActivate(rutas: ActivatedRouteSnapshot)
   {
+    const usuario = this.servicioCliente.usuarioLogin;
+
+    if (typeof usuario.email != "undefined")
+    {
+      return true;
+    }
+
     this.rutas.navigate(['/login']);
     return false;
-
   }    
-    
 }

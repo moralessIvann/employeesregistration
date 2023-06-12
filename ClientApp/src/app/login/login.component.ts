@@ -53,14 +53,12 @@ export class LoginComponent implements OnInit {
           //  this.token = (respuesta.objetoGenerico as UsuarioAPIJson).token;
           //console.log(respuesta)
         }
-
       })
     }
     else
     {
       this.token = this.servicioLogin.tokenAPI;
     }
-    
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -81,15 +79,19 @@ export class LoginComponent implements OnInit {
     };
 
     this.servicioCliente.loginCliente(cliente, this.token).subscribe((respuesta => {
-      if (respuesta.error != null && respuesta.error != '')
+      if (respuesta.error != null && respuesta.error != '') {
         this.resultadoPeticion = respuesta.texto;
-      else
-        this.resultadoPeticion = "Login correcto";
+        this.modalService.open(this.myModalInfo);
+      }
+      else {
+        this.router.navigate(['/producto']);
+        // this.resultadoPeticion = "Login correcto";
+      }
+        
 
     }));
 
     // Llamar método de Login incrustando el token en la cabecerea
     // this.resultadoPeticion = this.token;
-    this.modalService.open(this.myModalInfo);
   }
 }

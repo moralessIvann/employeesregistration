@@ -7,7 +7,7 @@ namespace net_angular.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ProductosController : ControllerBase
     {
         [HttpGet]

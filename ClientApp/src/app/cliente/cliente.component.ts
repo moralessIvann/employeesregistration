@@ -38,7 +38,7 @@ export class ClienteComponent{
 
   public AgregarCliente()
   {
-    console.log("cliente component ts : AgregarCliente Pepito al presionar boton");
+    console.log("cliente component ts : AgregarCliente metodo");
     this.enviado = true;
     if (this.altaForm.invalid) {
       console.log("invalido");

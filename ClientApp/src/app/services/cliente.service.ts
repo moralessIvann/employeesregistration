@@ -47,10 +47,14 @@ export class ClienteService
   {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer' + token
+      'Authorization': 'Bearer ' + token
     });
 
-    return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader }).pipe(
+    // return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader });
+
+    
+    return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader }).pipe
+      (
       map(result => {
         if (result.error == null || result.error == '') {
           const cliente: ClienteJson = (result.objetoGenerico as ClienteJson);
@@ -60,6 +64,7 @@ export class ClienteService
         return result;
       })
     );
+    
   }
 
 }

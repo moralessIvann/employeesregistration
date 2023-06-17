@@ -9,7 +9,7 @@ namespace net_angular.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    // [Authorize] // peticiones no entran hasta incrustar token en cabeceras
+    [Authorize] // peticiones no entran hasta incrustar token en cabeceras
     public class ClientesController : ControllerBase
     {
         private readonly IConfiguration configuration;

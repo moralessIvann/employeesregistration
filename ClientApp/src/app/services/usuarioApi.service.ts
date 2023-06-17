@@ -33,7 +33,8 @@ export class UsuarioApiService
   {
     return this.peticion.post<ResultadoJson>(this.url, autenticacion).pipe(
       map(result => {
-        if (result.error == null || result.error == '') {
+        if (result.error == null || result.error == '')
+        {
           const token: string = (result.objetoGenerico as UsuarioAPIJson).token;
           localStorage.setItem('token', JSON.stringify(token));
           this.tokenAPISubject.next(token);

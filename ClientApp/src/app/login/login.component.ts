@@ -23,7 +23,6 @@ export class LoginComponent implements OnInit {
   enviado: boolean = false;
   resultadoPeticion: string;
   @ViewChild("myModalInfo", { static: false }) myModalInfo: TemplateRef<any>;
-
   token: string;
 
   constructor(private servicioLogin: UsuarioApiService, private formBuilder: FormBuilder,
@@ -36,11 +35,35 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-
+  ngOnInit()
+  {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
-      pass: ['', Validators.required]
+      password: ['', Validators.required]
+    })
+
+    if (localStorage.getItem('token') == null) {
+      this.servicioLogin.loginAPI(this.usuarioAPI).subscribe(respuesta => {
+        if (respuesta.error != null && respuesta.error != '')
+          this.resultadoPeticion = respuesta.texto;
+        else {
+          this.token = this.servicioLogin.tokenAPI;
+          //this.token = (respuesta.objetoGenerico as UsuarioAPIJson).token;
+          console.log(this.token)
+        }
+      })
+    }
+    else
+    {
+      this.token = this.servicioLogin.tokenAPI;
+    }
+    
+    
+
+    /*
+    this.loginForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', Validators.required]
     })
 
     if (localStorage.getItem('token') == null) {
@@ -59,6 +82,7 @@ export class LoginComponent implements OnInit {
     {
       this.token = this.servicioLogin.tokenAPI;
     }
+    */
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -75,23 +99,26 @@ export class LoginComponent implements OnInit {
     let cliente: ClienteJson =
     {
       email: this.loginForm.controls['email'].value,
-      password: this.loginForm.controls['pass'].value
+      password: this.loginForm.controls['password'].value
     };
 
-    this.servicioCliente.loginCliente(cliente, this.token).subscribe((respuesta => {
-      if (respuesta.error != null && respuesta.error != '') {
-        this.resultadoPeticion = respuesta.texto;
-        this.modalService.open(this.myModalInfo);
-      }
-      else {
-        this.router.navigate(['/producto']);
-        // this.resultadoPeticion = "Login correcto";
-      }
-        
-
-    }));
+    
+    this.servicioCliente.loginCliente(cliente, this.token).subscribe(
+      respuesta => {
+        if (respuesta.error != null && respuesta.error != '') {
+          this.resultadoPeticion = respuesta.texto;
+          this.modalService.open(this.myModalInfo);
+        }
+        else
+        {
+          this.router.navigate(['/producto']);
+          // this.resultadoPeticion = "Login correcto";
+        }
+    })
+    
 
     // Llamar método de Login incrustando el token en la cabecerea
     // this.resultadoPeticion = this.token;
+    // this.modalService.open(this.myModalInfo);
   }
 }

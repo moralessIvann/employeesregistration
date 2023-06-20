@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { ProductoComponent } from './producto/producto.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AutenticacionGuard } from './Seguridad/autenticacion.guard';
+import { TokenInterceptor } from './Seguridad/token.interceptor';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { AutenticacionGuard } from './Seguridad/autenticacion.guard';
       { path: 'producto', component: ProductoComponent, canActivate: [AutenticacionGuard] },
     ])
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

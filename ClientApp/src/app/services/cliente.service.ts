@@ -52,8 +52,8 @@ export class ClienteService
 
     // return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader });
 
-    
-    return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader }).pipe
+    // return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader }).pipe
+    return this.peticion.post<ResultadoJson>(this.url + "Login", cliente).pipe
       (
       map(result => {
         if (result.error == null || result.error == '') {

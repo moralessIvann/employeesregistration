@@ -26,11 +26,14 @@ export class ProductoService
 
   dameProductos(token: string): Observable<ResultadoJson>
   {
+    /*
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
     });
-    
-    return this.peticion.get<ResultadoJson>(this.url, { headers: reqHeader });
+    */
+
+    // return this.peticion.get<ResultadoJson>(this.url, { headers: reqHeader });
+    return this.peticion.get<ResultadoJson>(this.url);
   }
 }

@@ -41,6 +41,7 @@
     <None Remove="ClientApp\src\app\modelos\usuarioAPIJson.ts" />
     <None Remove="ClientApp\src\app\producto\producto.component.ts" />
     <None Remove="ClientApp\src\app\Seguridad\autenticacion.guard.ts" />
+    <None Remove="ClientApp\src\app\Seguridad\token.interceptor.ts" />
     <None Remove="ClientApp\src\app\services\cliente.service.ts" />
     <None Remove="ClientApp\src\app\services\producto.service.ts" />
     <None Remove="ClientApp\src\app\services\usuarioApi.service.ts" />
@@ -56,6 +57,7 @@
     <TypeScriptCompile Include="ClientApp\src\app\modelos\usuarioAPIJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\producto\producto.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\Seguridad\autenticacion.guard.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\Seguridad\token.interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\cliente.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\producto.service.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\services\usuarioApi.service.ts" />

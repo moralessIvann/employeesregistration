@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { ClienteJson } from '../modelos/clienteJson';
+import { ClienteService } from '../services/cliente.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,6 +10,19 @@ import { Component } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  cliente: ClienteJson;
+  logado: boolean;
+
+  constructor(public servicioCliente: ClienteService, private router: Router)
+  {
+    this.servicioCliente.cliente.subscribe(res => {
+      this.cliente = res;
+      if (this.cliente == null || typeof this.cliente.email == "undefined")
+        this.logado = false;
+      else
+        this.logado = true;
+    })
+  }
 
   collapse() {
     this.isExpanded = false;
@@ -14,5 +30,11 @@ export class NavMenuComponent {
 
   toggle() {
     this.isExpanded = !this.isExpanded;
+  }
+
+  logout() {
+    this.servicioCliente.logout();
+    this.router.navigate(['/login']);
+    this.logado = false
   }
 }

@@ -13,7 +13,10 @@ import { map } from 'rxjs/operators';
 export class ClienteService
 {
   url: string = 'https://localhost:7182/api/clientes/';
+
   private emailLoginSubject: BehaviorSubject<ClienteJson>
+
+  public cliente: Observable<ClienteJson>;
 
   public get usuarioLogin(): ClienteJson {
     return this.emailLoginSubject.value;
@@ -22,6 +25,7 @@ export class ClienteService
   constructor(private peticion: HttpClient)
   {
     this.emailLoginSubject = new BehaviorSubject(JSON.parse(localStorage.getItem('emailLogin') || '{}'));
+    this.cliente = this.emailLoginSubject.asObservable();
   }
 
   obtenerClientes(): Observable<ResultadoJson>
@@ -64,7 +68,12 @@ export class ClienteService
         return result;
       })
     );
-    
+  }
+
+  logout() {
+    localStorage.removeItem('emailLogin');
+    localStorage.removeItem('token');
+    this.emailLoginSubject.next(null!);
   }
 
 }

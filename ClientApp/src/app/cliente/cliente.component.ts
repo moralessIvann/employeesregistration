@@ -4,6 +4,9 @@ import { ClienteService } from '../services/cliente.service';
 import { ClienteJson } from '../modelos/clienteJson';
 import { FormBuilder, Validators, AbstractControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { UsuarioApiService } from '../services/usuarioApi.service';
+import { AuthenticationAPIJson } from '../modelos/authenticationAPIJson';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-cliente-component',
@@ -16,9 +19,14 @@ export class ClienteComponent{
   enviado: boolean = false;
   resultadoPeticion: string;
   @ViewChild("myModalInfo", { static: false }) myModalInfo: TemplateRef<any>;
+  usuarioAPI: AuthenticationAPIJson;
 
-  constructor(private servicioCliente: ClienteService, private formBuilder: FormBuilder, private modalService: NgbModal)
+  constructor(private servicioCliente: ClienteService, private formBuilder: FormBuilder, private modalService: NgbModal, private servicioLogin: UsuarioApiService)
   {
+    this.usuarioAPI = {
+      email: environment.usuarioAPI,
+      password: environment.passwordAPI
+    }
   }
 
   ngOnInit(): void /*pass value to form controls */ 
@@ -28,6 +36,13 @@ export class ClienteComponent{
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     })
+
+    if (sessionStorage.getItem('token') == null) {
+      this.servicioLogin.loginAPI(this.usuarioAPI).subscribe(respuesta => {
+        if (respuesta.error != null && respuesta.error != '')
+          console.log("Error al obtener token");
+      })
+    }
   }
    
   get formulario(): { [key: string]: AbstractControl }
@@ -45,8 +60,6 @@ export class ClienteComponent{
       return;
     }
     console.log("valido");
-    //const cliente: Cliente = { nombre: 'Pepito', email: 'pepito@gmail.com', password: '21345' };
-    //this.servicioCliente.agregarClientes(cliente).subscribe;
 
     let cliente: ClienteJson =
     {
@@ -63,29 +76,5 @@ export class ClienteComponent{
 
       this.modalService.open(this.myModalInfo);
     });
-
-
-    /*
-
-    
-     this.servicioCliente.borrarClientes(this.altaForm.controls['email'].value).subscribe(res => {
-      if (res.error != null && res.error != '')
-        this.resultadoPeticion = res.texto;
-      else
-        this.resultadoPeticion = "Cliente eliminado";
-
-      this.modalService.open(this.myModalInfo);
-    })
-
-    this.servicioCliente.editarClientes(cliente).subscribe(res => {
-      if (res.error != null && res.error != '')
-        this.resultadoPeticion = res.texto;
-      else
-        this.resultadoPeticion = "Cliente editado correctamente.";
-
-      this.modalService.open(this.myModalInfo);
-    });
-
-    */
   }
 }

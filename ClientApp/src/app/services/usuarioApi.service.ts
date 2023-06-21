@@ -25,7 +25,7 @@ export class UsuarioApiService
 
   constructor(private peticion: HttpClient)
   {
-    this.tokenAPISubject = new BehaviorSubject(JSON.parse(localStorage.getItem('token') || '{}'));
+    this.tokenAPISubject = new BehaviorSubject(JSON.parse(sessionStorage.getItem('token') || '{}'));
   }
 
   // devolvera token para futuras peticiones
@@ -36,9 +36,9 @@ export class UsuarioApiService
         if (result.error == null || result.error == '')
         {
           const token: string = (result.objetoGenerico as UsuarioAPIJson).token;
-          localStorage.setItem('token', JSON.stringify(token));
+          sessionStorage.setItem('token', JSON.stringify(token));
           this.tokenAPISubject.next(token);
-          console.log("loginAPI method");
+          // console.log("loginAPI method");
         }
         return result;
       })

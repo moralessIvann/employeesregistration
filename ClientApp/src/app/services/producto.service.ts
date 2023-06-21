@@ -24,7 +24,7 @@ export class ProductoService
   }
   */
 
-  dameProductos(token: string): Observable<ResultadoJson>
+  dameProductos(): Observable<ResultadoJson>
   {
     /*
     var reqHeader = new HttpHeaders({

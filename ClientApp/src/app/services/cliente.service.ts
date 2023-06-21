@@ -47,16 +47,13 @@ export class ClienteService
     return this.peticion.delete<ResultadoJson>(this.url + email);
   }
 
-  loginCliente(cliente: ClienteJson, token: string): Observable<ResultadoJson>
+  loginCliente(cliente: ClienteJson): Observable<ResultadoJson>
   {
     var reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
+      'Authorization': 'Bearer '
     });
 
-    // return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader });
-
-    // return this.peticion.post<ResultadoJson>(this.url + "Login", cliente, { headers: reqHeader }).pipe
     return this.peticion.post<ResultadoJson>(this.url + "Login", cliente).pipe
       (
       map(result => {
@@ -71,8 +68,8 @@ export class ClienteService
   }
 
   logout() {
-    localStorage.removeItem('emailLogin');
-    localStorage.removeItem('token');
+    sessionStorage.removeItem('emailLogin');
+    sessionStorage.removeItem('token');
     this.emailLoginSubject.next(null!);
   }
 

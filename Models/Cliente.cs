@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace net_angular.Models;
 
-public class Cliente
+public partial class Cliente
 {
     public int Id { get; set; }
 

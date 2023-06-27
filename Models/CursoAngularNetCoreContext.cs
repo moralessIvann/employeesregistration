@@ -33,7 +33,6 @@ public partial class CursoAngularNetCoreContext : DbContext
             optionsBuilder.UseSqlServer(configuration.GetConnectionString("SQL"));
         }
     }
-        
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -54,8 +53,7 @@ public partial class CursoAngularNetCoreContext : DbContext
         {
             entity.ToTable("LINEAS_PEDIDOS");
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.ImporteUnitario).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.ImporteUnitario).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.IdPedidoNavigation).WithMany(p => p.LineasPedidos)
                 .HasForeignKey(d => d.IdPedido)
@@ -73,7 +71,7 @@ public partial class CursoAngularNetCoreContext : DbContext
             entity.ToTable("PEDIDOS");
 
             entity.Property(e => e.FechaPedido).HasColumnType("datetime");
-            entity.Property(e => e.Total).HasColumnType("decimal(18, 0)");
+            entity.Property(e => e.Total).HasColumnType("decimal(18, 2)");
 
             entity.HasOne(d => d.IdClienteNavigation).WithMany(p => p.Pedidos)
                 .HasForeignKey(d => d.IdCliente)

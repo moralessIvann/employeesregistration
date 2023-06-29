@@ -38,6 +38,8 @@
     <None Remove="ClientApp\src\app\login\login.component.ts" />
     <None Remove="ClientApp\src\app\modelos\authenticationAPIJson.ts" />
     <None Remove="ClientApp\src\app\modelos\ClienteJson.ts" />
+    <None Remove="ClientApp\src\app\modelos\lineaPedido.ts" />
+    <None Remove="ClientApp\src\app\modelos\pedido.ts" />
     <None Remove="ClientApp\src\app\modelos\resultadoJson.ts" />
     <None Remove="ClientApp\src\app\modelos\usuarioAPIJson.ts" />
     <None Remove="ClientApp\src\app\producto\producto.component.ts" />
@@ -54,6 +56,8 @@
     <TypeScriptCompile Include="ClientApp\src\app\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\authenticationAPIJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\clienteJson.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelos\lineaPedido.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelos\pedido.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\resultadoJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\usuarioAPIJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\producto\producto.component.ts" />

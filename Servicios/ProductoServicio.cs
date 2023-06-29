@@ -30,8 +30,8 @@ public class ProductoServicio : IProductos
                 {
                     var pedido = new Pedido();
                     pedido.Total = p.DetallesPedido.Sum(p => p.Cantidad * p.ImporteUnitario);
-                    pedido.Total = p.Total;
-                    pedido.IdCliente = p.IdCliente;
+                    var cliente = basedatos.Clientes.Single(cli => cli.Email == p.email);
+                    pedido.IdCliente = cliente.Id;
                     pedido.FechaPedido = DateTime.Now;
                     basedatos.Pedidos.Add(pedido);
                     basedatos.SaveChanges();

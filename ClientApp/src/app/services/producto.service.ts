@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ResultadoJson } from '../modelos/resultadoJson';
+import { Pedido } from '../modelos/pedido';
 
 @Injectable
   ({
@@ -35,5 +36,9 @@ export class ProductoService
 
     // return this.peticion.get<ResultadoJson>(this.url, { headers: reqHeader });
     return this.peticion.get<ResultadoJson>(this.url);
+  }
+
+  agregarPedido(pedido: Pedido): Observable<ResultadoJson> {
+    return this.peticion.post<ResultadoJson>(this.url, pedido);
   }
 }

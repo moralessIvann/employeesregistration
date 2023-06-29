@@ -2,14 +2,11 @@
 
 public class PedidoViewModel
 {
-    public int IdCliente { get; set; }
-
-    public decimal Total { get; set; }
+    public string email { get; set; }
 
     public List<LineasPedidoViewModel> DetallesPedido { get; set; }
 
     public PedidoViewModel() { this.DetallesPedido = new List<LineasPedidoViewModel>(); }
-
 }
 
 public class LineasPedidoViewModel

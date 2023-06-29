@@ -15,11 +15,14 @@ namespace net_angular.Controllers
     {
         private readonly IConfiguration configuration;
         private IUsuarioAPI usuarioAPIServicio;
+        private readonly ILogger<UsuarioAPIController> log;
 
-        public UsuarioAPIController(IConfiguration configuration, IUsuarioAPI usuarioAPIServicio)
+        public UsuarioAPIController(IConfiguration configuration, IUsuarioAPI usuarioAPIServicio,
+            ILogger<UsuarioAPIController> l)
         {
             this.configuration = configuration;
             this.usuarioAPIServicio = usuarioAPIServicio;
+            this.log = l;
         }
         // Se utilizo de forma temporal para hacer alta de clientes
         /*
@@ -53,11 +56,9 @@ namespace net_angular.Controllers
         }
         */
 
-        //[HttpGet("{Email}/{Pass}")]
         [HttpPost]
         public IActionResult DameUsuarioAPI(AuthenticationAPI auth)
         {
-            // AuthenticationAPI authentication = new AuthenticationAPI();
             ResultadoJson resultadoJson = new ResultadoJson();
 
             try
@@ -68,6 +69,7 @@ namespace net_angular.Controllers
             catch (Exception ex)
             {
                 resultadoJson.Error = "Se produjo un error al obtener usuario del API" + ex.ToString();
+                log.LogError("Error al obtener usuario de API:" + ex.ToString());
             }
 
             return Ok(resultadoJson);

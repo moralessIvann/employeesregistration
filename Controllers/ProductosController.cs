@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Storage;
 using net_angular.Models;
 using net_angular.Models.ViewModels;
+using net_angular.Servicios;
 
 namespace net_angular.Controllers
 {
@@ -12,6 +13,14 @@ namespace net_angular.Controllers
     [Authorize]
     public class ProductosController : ControllerBase
     {
+        private IProductos productoServicio;
+        private readonly ILogger<ProductosController> log;
+        public ProductosController(IProductos productoServicio, ILogger<ProductosController> l)
+        {
+            this.productoServicio = productoServicio;
+            this.log = l;
+        }
+
         [HttpGet]
         public IActionResult ConsultarProducto()
         {
@@ -19,16 +28,16 @@ namespace net_angular.Controllers
 
             try
             {
-                using (CursoAngularNetCoreContext basedatos = new CursoAngularNetCoreContext())
-                {
-                    var lista = basedatos.Productos.ToList();
-                    res.ObjetoGenerico = lista;
-                }
+
+                var lista = productoServicio.DameProductos();
+                res.ObjetoGenerico = lista;
+                
             }
             catch (Exception ex)
             {
 
                 res.Error = "Se produjo un error al obtener los productos" + ex.Message;
+                log.LogError("Error al obtener libros:" + ex.ToString());
             }
             return Ok(res);
         }
@@ -41,38 +50,13 @@ namespace net_angular.Controllers
 
             try
             {
-                using (CursoAngularNetCoreContext basedatos = new CursoAngularNetCoreContext())
-                {
-                    transaccion = basedatos.Database.BeginTransaction();
-                    {
-                        var pedido = new Pedido();
-                        pedido.Total = p.DetallesPedido.Sum(p => p.Cantidad * p.ImporteUnitario);
-                        pedido.Total = p.Total;
-                        pedido.IdCliente = p.IdCliente;
-                        pedido.FechaPedido = DateTime.Now;
-                        basedatos.Pedidos.Add(pedido);
-                        basedatos.SaveChanges();
-
-                        foreach (var d in p.DetallesPedido)
-                        {
-                            var detalle = new LineasPedido();
-                            detalle.Cantidad = d.Cantidad;
-                            detalle.ImporteUnitario = d.ImporteUnitario;
-                            detalle.IdProducto = d.IdProducto;
-                            detalle.IdPedido = pedido.Id;
-                            basedatos.LineasPedidos.Add(detalle);
-                            basedatos.SaveChanges();
-                        }
-                    }
-                }
+                productoServicio.AgregarPedido(p);
             }
             catch (Exception ex)
             {
-                if (transaccion != null)
-                {
-                    transaccion.Rollback();
-                }
+                res.Texto = "Se produjo un error al realizar pedido";
                 res.Error = "Se produjo un error al realizar el pedido" + ex.Message;
+                log.LogError("Se produjo un error al realizar el pedido" + ex.ToString());
             }
             return Ok(res);
         }

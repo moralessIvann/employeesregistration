@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using net_angular.Servicios;
 using System.Text;
+using NLog.Extensions.Logging;  
 
 var builder = WebApplication.CreateBuilder(args);
 string cors = "ConfigurarCORS";
@@ -22,6 +23,12 @@ builder.Services.AddCors(options =>
 
 // indicar que se inyectara este servicio a la aplicacion
 builder.Services.AddScoped<IUsuarioAPI, UsuarioAPIServicio>();
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.AddNLog("nlog.config");
+});
+builder.Services.AddScoped<IProductos, ProductoServicio>();
+builder.Services.AddScoped<IClientes, ClienteServicio>();
 
 //JWT
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

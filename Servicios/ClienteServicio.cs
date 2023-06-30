@@ -79,4 +79,16 @@ public class ClienteServicio : IClientes
         }
         return c;
     }
+
+    public Cliente ConsultarCliente(ClienteViewModel c)
+    {
+        Cliente cliente;
+
+        using(CursoAngularNetCoreContext basedatos = new CursoAngularNetCoreContext())
+        {
+            cliente = basedatos.Clientes.Single(cli => cli.Email == c.email);
+        }
+
+        return cliente;
+    }
 }

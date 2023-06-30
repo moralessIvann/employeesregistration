@@ -121,6 +121,30 @@ namespace net_angular.Controllers
             
             return Ok(resultado);
         }
+
+        [HttpPost("Cliente")]
+        public IActionResult ConsultarClientes(ClienteViewModel c)
+        {
+            ResultadoJson resultado = new ResultadoJson();
+
+            try
+            {
+                ClienteViewModel aux = new ClienteViewModel();
+                var cliente = clientesServicio.ConsultarCliente(c);
+                aux.email = cliente.Email;
+                aux.nombre = cliente.Nombre;
+                resultado.ObjetoGenerico = aux;
+            }
+            catch (Exception ex)
+            {
+
+                resultado.Error = "Se produjo un error al iniciar sesion" + ex.ToString();
+                resultado.Texto = "Usuario o password incorrecta";
+                log.LogError("Se produjo un error al iniciar sesion" + ex.ToString());
+            }
+
+            return Ok(resultado);
+        }
     
     }
 }

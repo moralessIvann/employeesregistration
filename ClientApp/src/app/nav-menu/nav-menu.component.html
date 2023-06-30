@@ -26,10 +26,13 @@
             <a class="nav-link text-dark" [routerLink]="['/']">Inicio</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" *ngIf="logado" [routerLink]="['/historicopedidos']">Mis Pedidos</a>
+          </li>
+          <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" *ngIf="!logado" [routerLink]="['/cliente']">Nuevo Cliente</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/producto']">Producto</a>
+            <a class="nav-link text-dark" *ngIf="logado" [routerLink]="['/producto']">Productos</a>
           </li>
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" *ngIf="!logado" [routerLink]="['/login']">Login</a>
@@ -37,6 +40,7 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" (click)="logout()" *ngIf="logado" [routerLink]="['/login']">Cerrar Sesion</a>
           </li>
+
         </ul>
       </div>
     </div>

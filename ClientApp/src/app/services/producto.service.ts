@@ -3,6 +3,7 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { ResultadoJson } from '../modelos/resultadoJson';
 import { Pedido } from '../modelos/pedido';
+import { ClienteJson } from '../modelos/clienteJson';
 
 @Injectable
   ({
@@ -15,30 +16,20 @@ export class ProductoService
 
   constructor(private peticion: HttpClient)
   {
-
   }
-
-  /*
-  consultarProductos(): Observable<ResultadoJson>
-  {
-    return this.peticion.get<ResultadoJson>(this.url);
-  }
-  */
 
   dameProductos(): Observable<ResultadoJson>
   {
-    /*
-    var reqHeader = new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + token
-    });
-    */
-
     // return this.peticion.get<ResultadoJson>(this.url, { headers: reqHeader });
     return this.peticion.get<ResultadoJson>(this.url);
   }
 
   agregarPedido(pedido: Pedido): Observable<ResultadoJson> {
     return this.peticion.post<ResultadoJson>(this.url, pedido);
+  }
+
+  obtenerPedido(cliente: ClienteJson): Observable<ResultadoJson>
+  {
+    return this.peticion.post<ResultadoJson>(this.url + "Pedidos", cliente);
   }
 }

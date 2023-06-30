@@ -34,12 +34,15 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\cliente\cliente.component.ts" />
+    <None Remove="ClientApp\src\app\HistoricoPedidos\historicopedidos.component.ts" />
     <None Remove="ClientApp\src\app\inicio\inicio.component.ts" />
     <None Remove="ClientApp\src\app\login\login.component.ts" />
     <None Remove="ClientApp\src\app\modelos\authenticationAPIJson.ts" />
     <None Remove="ClientApp\src\app\modelos\ClienteJson.ts" />
     <None Remove="ClientApp\src\app\modelos\lineaPedido.ts" />
     <None Remove="ClientApp\src\app\modelos\pedido.ts" />
+    <None Remove="ClientApp\src\app\modelos\pedidoDetalle.ts" />
+    <None Remove="ClientApp\src\app\modelos\pedidoDetalleProducto.ts" />
     <None Remove="ClientApp\src\app\modelos\resultadoJson.ts" />
     <None Remove="ClientApp\src\app\modelos\usuarioAPIJson.ts" />
     <None Remove="ClientApp\src\app\producto\producto.component.ts" />
@@ -52,12 +55,15 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\app\cliente\cliente.component.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\HistoricoPedidos\historicopedidos.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\inicio\inicio.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\login\login.component.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\authenticationAPIJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\clienteJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\lineaPedido.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\pedido.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelos\pedidoDetalle.ts" />
+    <TypeScriptCompile Include="ClientApp\src\app\modelos\pedidoDetalleProducto.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\resultadoJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\modelos\usuarioAPIJson.ts" />
     <TypeScriptCompile Include="ClientApp\src\app\producto\producto.component.ts" />

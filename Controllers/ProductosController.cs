@@ -60,5 +60,25 @@ namespace net_angular.Controllers
             }
             return Ok(res);
         }
+
+        [HttpPost("Pedidos")]
+        public IActionResult PedidosClientes(ClienteViewModel c)
+        {
+            ResultadoJson res = new ResultadoJson();
+
+            try
+            {
+                var lista = productoServicio.PedidosClientes(c);
+                res.ObjetoGenerico = lista;
+            }
+            catch (Exception ex)
+            {
+
+                res.Error = "Se produjo un error al obtener los pedidos del cliente" + ex.Message;
+                res.Texto = "Se produjo un error al obtener los pedidos del cliente";
+                log.LogError("Error al obtener los pedidos del cliente:" + ex.ToString());
+            }
+            return Ok(res);
+        }
     }
 }

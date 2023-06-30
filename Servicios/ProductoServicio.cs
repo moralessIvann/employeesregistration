@@ -58,4 +58,39 @@ public class ProductoServicio : IProductos
             throw new Exception(ex.ToString());
         }
     }
+
+    public List<PedidoDetalleViewModel> PedidosClientes(ClienteViewModel c)
+    {
+        List<PedidoDetalleViewModel> lista = new List<PedidoDetalleViewModel>();
+
+        using (CursoAngularNetCoreContext basedatos = new CursoAngularNetCoreContext())
+        {
+            var cliente = basedatos.Clientes.Single(cli => cli.Email == c.email);
+            List<Pedido> listaPedido = (from p in basedatos.Pedidos
+                                        where p.IdCliente == cliente.Id
+                                        select p).ToList();
+
+            foreach(Pedido p in listaPedido)
+            {
+                PedidoDetalleViewModel auxPedido = new PedidoDetalleViewModel();
+                auxPedido.Total = p.Total;
+                List<LineasPedido> listaDetalle = (from pd in basedatos.LineasPedidos
+                                                   where pd.IdPedido == p.Id
+                                                   select pd).ToList();
+                
+                foreach(LineasPedido l in listaDetalle)
+                {
+                    PedidoDetalleProductoViewModel prod = new PedidoDetalleProductoViewModel();
+                    prod.ImporteUntario = l.ImporteUnitario;
+                    prod.Cantidad = l.Cantidad;
+                    var prodAux = basedatos.Productos.Single(p => p.Id == l.IdProducto);
+                    prod.NombreProducto = prodAux.Nombre;
+                    auxPedido.DetallesProductosPedido.Add(prod);
+                }
+                lista.Add(auxPedido);
+            }
+        }
+
+            return lista;
+    }
 }

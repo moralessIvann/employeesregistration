@@ -9,4 +9,5 @@ public interface IProductos
 
     public void AgregarPedido(PedidoViewModel p);
 
+    public List<PedidoDetalleViewModel> PedidosClientes(ClienteViewModel c);
 }

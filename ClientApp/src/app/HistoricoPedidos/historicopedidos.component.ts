@@ -49,23 +49,19 @@ export class HistoricoPedidosComponent implements OnInit
     this.servicioProducto.obtenerPedido(this.cliente).subscribe(res =>
     {
       if (res.error != null && res.error != '') {
-        console.log("Error al obtener pedidos");
+        // console.log("Error al obtener pedidos");
       }
       else
       {
         this.listaPedidos = res.objetoGenerico;
       }
-      //console.log(this.listaPedidos);
-      //console.log(this.listaPedidos[0]);
-      //console.log(this.listaPedidos[0].total);
-      //console.log(this.listaPedidos[0].detallesProductosPedido[0].nombreProducto);
     })
   }
 
   detalles(indice: number) {
     this.detalleAux = indice;
     this.modalService.open(this.myModalInfo);
-    //console.log(this.listaPedidos[indice].detallesProductosPedido[0].nombreProducto)
+    console.log(this.listaPedidos[this.detalleAux].detallesProductosPedido);
   }
 }
 

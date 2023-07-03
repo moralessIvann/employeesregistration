@@ -73,4 +73,8 @@ export class ClienteService
     this.emailLoginSubject.next(null!);
   }
 
+  dameCliente(cliente: ClienteJson): Observable<ResultadoJson> {
+    return this.peticion.post<ResultadoJson>(this.url + "Cliente", cliente);
+  }
+
 }

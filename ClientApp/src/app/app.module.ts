@@ -14,6 +14,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AutenticacionGuard } from './Seguridad/autenticacion.guard';
 import { TokenInterceptor } from './Seguridad/token.interceptor';
 import { HistoricoPedidosComponent } from './HistoricoPedidos/historicopedidos.component';
+import { MisDatosComponent } from './modelos/MisDatos/misDatos.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { HistoricoPedidosComponent } from './HistoricoPedidos/historicopedidos.c
     LoginComponent,
     ProductoComponent,
     HistoricoPedidosComponent,
+    MisDatosComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -39,6 +41,7 @@ import { HistoricoPedidosComponent } from './HistoricoPedidos/historicopedidos.c
       { path: 'login', component: LoginComponent },
       { path: 'producto', component: ProductoComponent, canActivate: [AutenticacionGuard] },
       { path: 'historicopedidos', component: HistoricoPedidosComponent, canActivate: [AutenticacionGuard] },
+      { path: 'misDatos', component: MisDatosComponent, canActivate: [AutenticacionGuard] },
     ])
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }],

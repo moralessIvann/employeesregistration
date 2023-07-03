@@ -64,7 +64,7 @@ namespace net_angular.Servicios
                 audience: configuration["JWT:Audience"],
                 claims: _claims,
                 notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddDays(30)
+                expires: DateTime.UtcNow.AddSeconds(20)
                 );
 
             // token

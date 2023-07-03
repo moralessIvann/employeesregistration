@@ -81,7 +81,7 @@ public class ProductoServicio : IProductos
                 foreach(LineasPedido l in listaDetalle)
                 {
                     PedidoDetalleProductoViewModel prod = new PedidoDetalleProductoViewModel();
-                    prod.ImporteUntario = l.ImporteUnitario;
+                    prod.ImporteUnitario = l.ImporteUnitario;
                     prod.Cantidad = l.Cantidad;
                     var prodAux = basedatos.Productos.Single(p => p.Id == l.IdProducto);
                     prod.NombreProducto = prodAux.Nombre;

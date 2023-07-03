@@ -40,7 +40,9 @@
           <li class="nav-item" [routerLinkActive]="['link-active']">
             <a class="nav-link text-dark" (click)="logout()" *ngIf="logado" [routerLink]="['/login']">Cerrar Sesion</a>
           </li>
-
+          <li class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" *ngIf="logado" [routerLink]="['/misDatos']">Mis Datos</a>
+          </li>
         </ul>
       </div>
     </div>

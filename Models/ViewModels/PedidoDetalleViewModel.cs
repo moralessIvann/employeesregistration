@@ -16,5 +16,5 @@ public class PedidoDetalleProductoViewModel
 {
     public string NombreProducto { get; set; }
     public int Cantidad { get; set; }
-    public decimal ImporteUntario { get; set; }
+    public decimal ImporteUnitario { get; set; }
 }

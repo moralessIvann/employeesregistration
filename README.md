@@ -21,7 +21,7 @@ PUT: employee/update/{IdEmployee} => update desired employee details.<br>
 DELETE: employee/delete/{IdEmployee} => delete desired employee.<br>
 
 <p align="center">
-	<img src="documentation_imgs/api_endpoints.png"  width="650" height="500">
+	<img src="documentation_imgs/api_endpoints.PNG"  width="1000" height="500">
 </p>
 
 ## Tutorial
@@ -29,7 +29,7 @@ DELETE: employee/delete/{IdEmployee} => delete desired employee.<br>
 When the app is ready, you can see a list of recents employees.
 
 <p align="center">
-	<img src="documentation_imgs/employee_list.png"  width="650" height="500">
+	<img src="documentation_imgs/employee_list.PNG"  width="1000" height="500">
 </p>
 
 ## Create New Employee
@@ -39,7 +39,7 @@ To add a new employee, click on the "New Employee" blue button, located at the t
 When fields are completed, the "Save" blue button will be able to save the new employee data. In case you want to close the window, click on the red button "Go back".
 
 <p align="center">
-	<img src="documentation_imgs/new_employee.png"  width="650" height="500">
+	<img src="documentation_imgs/new_employee.PNG"  width="1000" height="500">
 </p>
 
 ## Edit Employee Details
@@ -47,7 +47,7 @@ Click on the employee's blue pencil icon from the list in order to edit all data
 When finished, click on the "Update" blue button to save the new employee data. In case you want to close the window, click on the red button "Go back".
 
 <p align="center">
-	<img src="documentation_imgs/edit_employee.png"  width="650" height="500">
+	<img src="documentation_imgs/edit_employee.PNG"  width="1000" height="500">
 </p>
 
 ## Delete Employee
@@ -58,7 +58,7 @@ Filter: You can search any employee by  id, name, department, salary or contract
 Pagination: When employee list gets bigger, you can change to other page in order to view more employees (this is bases in how many employees you want to display on the list).
 
 <p align="center">
-	<img src="documentation_imgs/employee_list.png"  width="650" height="500">
+	<img src="documentation_imgs/employee_list.PNG"  width="1000" height="500">
 </p>
 
 ## App Demonstration
